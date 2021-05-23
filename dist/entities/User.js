@@ -24,42 +24,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 exports.__esModule = true;
-exports.User = void 0;
+exports.Users = void 0;
 var typeorm_1 = require("typeorm");
-var Planet_1 = require("./Planet");
-var User = /** @class */ (function (_super) {
-    __extends(User, _super);
-    function User() {
+var Todo_1 = require("./Todo");
+var Users = /** @class */ (function (_super) {
+    __extends(Users, _super);
+    function Users() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
-    ], User.prototype, "id");
+    ], Users.prototype, "id");
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], User.prototype, "first_name");
+    ], Users.prototype, "first_name");
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], User.prototype, "last_name");
+    ], Users.prototype, "last_name");
     __decorate([
         typeorm_1.Column({ unique: true }),
         __metadata("design:type", String)
-    ], User.prototype, "email");
+    ], Users.prototype, "email");
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], User.prototype, "password");
+    ], Users.prototype, "password");
     __decorate([
-        typeorm_1.ManyToMany(function () { return Planet_1.Planet; }),
-        typeorm_1.JoinTable(),
+        OneToMany(function () { return Todo_1.Todo; }, function (todo) { return todo.user; }, {
+            cascade: true
+        }),
         __metadata("design:type", Array)
-    ], User.prototype, "planets");
-    User = __decorate([
+    ], Users.prototype, "todos");
+    Users = __decorate([
         typeorm_1.Entity()
-    ], User);
-    return User;
+    ], Users);
+    return Users;
 }(typeorm_1.BaseEntity));
-exports.User = User;
+exports.Users = Users;

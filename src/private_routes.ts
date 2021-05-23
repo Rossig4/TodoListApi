@@ -19,5 +19,6 @@ import * as actions from './actions';
 const router = Router();
 
 router.get('/user', safe(actions.getUsers));
+router.get('/todos/user/:id', safe(actions.getTodo));
 
 export default router;
