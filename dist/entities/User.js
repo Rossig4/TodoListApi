@@ -24,43 +24,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 exports.__esModule = true;
-exports.Users = void 0;
+exports.User = void 0;
 var typeorm_1 = require("typeorm");
 var Todo_1 = require("./Todo");
-var Users = /** @class */ (function (_super) {
-    __extends(Users, _super);
-    function Users() {
+var User = /** @class */ (function (_super) {
+    __extends(User, _super);
+    function User() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
-    ], Users.prototype, "id");
+    ], User.prototype, "id");
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Users.prototype, "first_name");
+    ], User.prototype, "first_name");
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Users.prototype, "last_name");
+    ], User.prototype, "last_name");
     __decorate([
         typeorm_1.Column({ unique: true }),
         __metadata("design:type", String)
-    ], Users.prototype, "email");
+    ], User.prototype, "email");
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Users.prototype, "password");
+    ], User.prototype, "password");
     __decorate([
         typeorm_1.OneToMany(function () { return Todo_1.Todo; }, function (todo) { return todo.user; }, {
             cascade: true
         }),
         __metadata("design:type", Array)
-    ], Users.prototype, "todos");
-    Users = __decorate([
+    ], User.prototype, "todos");
+    User = __decorate([
         typeorm_1.Entity()
-    ], Users);
-    return Users;
+    ], User);
+    return User;
 }(typeorm_1.BaseEntity));
-exports.Users = Users;
+exports.User = User;

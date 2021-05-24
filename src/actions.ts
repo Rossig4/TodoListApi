@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { getRepository } from 'typeorm'  // getRepository"  traer una tabla de la base de datos asociada al objeto
-import { Users } from './entities/User'
+import { User } from './entities/User'
 import { Exception } from './utils'
 import { Todo } from './entities/Todo'
 
@@ -12,7 +12,7 @@ export const createUser = async (req: Request, res:Response): Promise<Response> 
 	if(!req.body.email) throw new Exception("Please provide an email")
 	if(!req.body.password) throw new Exception("Please provide a password")
 
-	const userRepo = getRepository(Users)
+	const userRepo = getRepository(User)
 	// fetch for any user with this email
 	const user = await userRepo.findOne({ where: {email: req.body.email }})
     if(user) throw new Exception("Users already exists with this email")
@@ -37,7 +37,7 @@ export const createUser = async (req: Request, res:Response): Promise<Response> 
 }
 
 export const getUsers = async (req: Request, res: Response): Promise<Response> =>{
-		const users = await getRepository(Users).find({relations:["todos"]});
+		const users = await getRepository(User).find({relations:["todos"]});
 		return res.json(users);
 }
 
@@ -47,7 +47,7 @@ export const getTodo = async (req: Request, res: Response): Promise<Response> =>
 }
 
 export const getTodos = async (req: Request, res: Response): Promise<Response> =>{
-    const Todo = await getRepository(Todo).find({ relations: ["users"] });
+    const todos = await getRepository(Todo).find({ relations: ["users"] });
     return res.json(todos);
 }
 
@@ -55,13 +55,13 @@ export const createTodo = async (req: Request, res: Response): Promise<Response>
     if(!req.body.label) throw new Exception("Por favor proporcione una etiqueta")
 
     //creo new todo
-    const user = await getRepository(Users).findOne({ relations: ["todo"], where: {id: req.params.id}});
+    const user = await getRepository(User).findOne({ relations: ["todo"], where: {id: req.params.id}});
     if (user) {
         const newtodo = new Todo();
         newtodo.label = req.body.label
         newtodo.done = false
         user.todos.push(newtodo)
-        const results = await getRepository(Users).save(user); //grabo el new todo
+        const results = await getRepository(User).save(user); //grabo el new todo
         return res.json(results);
     }
         return res.json("Nada para hacer");
@@ -69,18 +69,17 @@ export const createTodo = async (req: Request, res: Response): Promise<Response>
 
 
 export const updateTodo = async (req: Request, res: Response): Promise<Response> =>{
-    const todoRepo = await getRepository(todos)
+    const todoRepo = await getRepository(Todo)
     const todos = await todoRepo.findOne(req.params.id);
-    if(!todo) throw new Exception("No hay nada que hacer")
-    return res.json(todos);
-
-    todoRepo.merge(todo, req.body);
-    const results = await todoRepo.save(todo);
+    if(!todos) throw new Exception("No hay nada que hacer")
+   
+    todoRepo.merge(todos, req.body);
+    const results = await todoRepo.save(todos);
     return res.json(results);
 }
 
 export const deleteUser = async (req: Request, res: Response): Promise<Response> =>{
     const user = await getRepository(User).findOne(req.params.id);
     if(!user) throw new Exception("No hay nada que hacer")
-return res.json(todos)
+return res.json(user)
 }
