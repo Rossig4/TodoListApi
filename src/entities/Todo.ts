@@ -4,7 +4,7 @@ import {
     BaseEntity
 } from "typeorm";
 
-import { User } from "./User"
+import { Users } from "./User"
 
 @Entity()
 export class Todo extends BaseEntity {
@@ -17,6 +17,6 @@ export class Todo extends BaseEntity {
     @Column()
     done: boolean;
 
-    @ManyToOne(() => User, user => user.todos, { onDelete: "CASCADE"})
-    user: User;
+    @ManyToOne(() => Users, user => user.todos, { onDelete: "CASCADE"})
+    user: Users;
 }

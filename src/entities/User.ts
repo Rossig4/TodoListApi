@@ -1,6 +1,6 @@
 import {
   Entity, Column, PrimaryGeneratedColumn, ManyToMany, 
-  BaseEntity, JoinTable
+  BaseEntity, JoinTable, OneToMany
 } from 'typeorm';
 import { Todo } from './Todo';
 

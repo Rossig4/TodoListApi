@@ -32,7 +32,6 @@ var Todo = /** @class */ (function (_super) {
     function Todo() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    var _a;
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
@@ -46,8 +45,8 @@ var Todo = /** @class */ (function (_super) {
         __metadata("design:type", Boolean)
     ], Todo.prototype, "done");
     __decorate([
-        typeorm_1.ManyToOne(function () { return User_1.User; }, function (user) { return user.todos; }, { onDelete: "CASCADE" }),
-        __metadata("design:type", typeof (_a = typeof User_1.User !== "undefined" && User_1.User) === "function" ? _a : Object)
+        typeorm_1.ManyToOne(function () { return User_1.Users; }, function (user) { return user.todos; }, { onDelete: "CASCADE" }),
+        __metadata("design:type", User_1.Users)
     ], Todo.prototype, "user");
     Todo = __decorate([
         typeorm_1.Entity()
