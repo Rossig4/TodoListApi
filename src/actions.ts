@@ -80,6 +80,12 @@ export const updateTodo = async (req: Request, res: Response): Promise<Response>
 
 export const deleteUser = async (req: Request, res: Response): Promise<Response> =>{
     const user = await getRepository(User).findOne(req.params.id);
-    if(!user) throw new Exception("No hay nada que hacer")
+    if(!user) {
+    
+return res.json({msg:"El Usuario no existe"});
+} else { 
+const user = await getRepository(User).delete(req.params.id);
 return res.json(user)
+}
+
 }
